@@ -22,4 +22,7 @@
 
 - (id)before:(NSUInteger)index;
 
+- (void)addFirst:(id)object;
+
+- (void)append:(id)object;
 @end

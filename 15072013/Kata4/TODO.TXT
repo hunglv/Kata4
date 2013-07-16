@@ -2,17 +2,22 @@
 - số phần tử = 0.
 2, Khởi tạo danh sách từ 1 mảng các phần tử.
 - số phần từ = số phần tử của mảng.
-- phần tử đầu tiên là phần tử đầu tiên của mảng.
-- phần tử cuối cùng là phần tử cuối cùng của mảng.
-3, Thêm một phần tử vào cuối danh sách
-- số phần tử sau khi thêm tăng thêm 1.
-- phần tử cuối cùng của danh sách là phần tử thêm vào.
+3, Lấy tham chiếu một phần tử trong danh sách
+a, Lấy tham chiếu một phần tử đầu danh sách
+b, Lấy tham chiếu một phần tử cuối danh sách
+c, Lấy tham chiếu phần tử sau phần tử thứ n trong danh sách
+d, Lấy tham chiếu phần tử trước phần tử thứ n trong danh sách
+
 4, Thêm một phần tử vào đầu danh sách
 - số phần tử tăng thêm 1.
 - phần tử đầu tiên của danh sách là phần tử thêm vào.
-5, Thêm một phần tử vào vị trí n giữa danh sách
+
+5, Thêm một phần tử vào cuối danh sách
+- số phần tử tăng thêm 1.
+- phần tử cuối cùng của danh sách là phần tử thêm vào.
+6, Thêm một phần tử vào vị trí n giữa danh sách
 - số phần tử tăng thêm 1.
 - phần tử vị trí n là phần tử thêm vào.
-6, Xoá một phần tử khỏi danh sách
+7, Xoá một phần tử khỏi danh sách
 - Khi danh sách có nhiều hơn 1 phần tử, xoá khỏi danh sách số phần tử giảm đi 1.
 - Khi danh sách rỗng, thực hiện xoá sẽ có exception là EmptyList

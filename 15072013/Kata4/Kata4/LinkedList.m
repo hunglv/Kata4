@@ -26,6 +26,15 @@
     return self;
 }
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        items = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 - (NSUInteger)size {
     return items.count;
 }
@@ -60,6 +69,22 @@
         mid = [items objectAtIndex:index - 1];
     }
     return mid;
+}
+
+-(void)addFirst:(id)object {
+    if (!object) {
+        @throw [NSException exceptionWithName:@"InsertObjectNil" reason:nil userInfo:nil];
+    } else {
+        [items insertObject:object atIndex:0];
+    }
+}
+
+- (void)append:(id)object {
+    if (!object) {
+        @throw [NSException exceptionWithName:@"InsertObjectNil" reason:nil userInfo:nil];
+    } else {
+        [items addObject:object];
+    }
 }
 
 @end

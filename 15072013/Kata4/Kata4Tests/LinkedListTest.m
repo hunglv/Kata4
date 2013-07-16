@@ -87,6 +87,48 @@ describe(@"LinkedList test", ^{
             [mid shouldBeNil];
         });
     });
+    
+    context(@"Them mot phan tu vao dau danh sach", ^{
+        it(@"Them mot phan tu vao dau danh sach rong", ^{
+            NSUInteger current = sut.size;
+            [sut addFirst:@6];
+            [[theValue(sut.size) should] equal:theValue(current + 1)];
+        });
+        
+        it(@"Them mot phan tu vao danh sach, phan tu dau tien cua danh sach la phan tu them vao", ^{
+            NSNumber *objectAdd = @10;
+            [sut2 addFirst:objectAdd];
+            id first = [sut2 first];
+            [[first should] equal:@10];
+        });
+        
+        it(@"Them mot phan tu nil vao dau danh sach se nem vao exeption InsertObjectNil", ^{
+            [[theBlock(^{
+                [sut addFirst:nil];
+            }) should] raiseWithName:@"InsertObjectNil"];
+        });
+    });
+    
+    context(@"Them mot phan tu vao cuoi danh sach", ^{
+        it(@"Them mot phan tu vao cuoi danh sach", ^{
+            NSUInteger current = sut.size;
+            [sut append:@6];
+            [[theValue(sut.size) should] equal:theValue(current + 1)];
+        });
+        
+        it(@"Them mot phan tu vao danh sach, phan tu cuoi cua danh sach la phan tu them vao", ^{
+            NSNumber *objectAdd = @10;
+            [sut2 append:objectAdd];
+            id last = [sut2 last];
+            [[last should] equal:@10];
+        });
+        
+        it(@"Them mot phan tu nil vao cuoi danh sach se nem vao exeption InsertObjectNil", ^{
+            [[theBlock(^{
+                [sut append:nil];
+            }) should] raiseWithName:@"InsertObjectNil"];
+        });
+    });
         
 });
 SPEC_END
