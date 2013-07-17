@@ -87,4 +87,21 @@
     }
 }
 
+-(void)insertAfterIndex:(NSUInteger)index object:(id)object {
+    if (!object) {
+        @throw [NSException exceptionWithName:@"InsertObjectNil" reason:nil userInfo:nil];
+    } else {
+        if (index >= items.count) {
+            @throw [NSException exceptionWithName:@"BoundaryOutExeption" reason:nil userInfo:nil];
+        } else {
+            [items insertObject:object atIndex:(index + 1)];
+        }
+    }    
+}
+
+-(id)deleteIndex:(NSUInteger)index {
+    [items removeObjectAtIndex:index];
+    return nil;
+}
+
 @end

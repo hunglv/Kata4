@@ -129,6 +129,45 @@ describe(@"LinkedList test", ^{
             }) should] raiseWithName:@"InsertObjectNil"];
         });
     });
+    
+    context(@"Them mot phan tu vao sau phan tu thu n trong danh sach", ^{
+        it(@"So luong phan tu tang them 1", ^{
+            NSUInteger current = sut2.size;
+            [sut2 insertAfterIndex:5 object:@10];
+            [[theValue(sut2.size) should] equal:theValue(current + 1)];
+        });
+        
+        it(@"Phan tu vi tri thu n + 1 la phan tu duoc them vao", ^{
+            NSNumber *insertObject = @100;
+            [sut2 insertAfterIndex:4 object:insertObject];
+            id expectObject = [sut2 after:4];
+            [[expectObject should] equal:insertObject];
+        });
+        
+        it(@"Danh sach co it hon hoac bang n phan tu se thong bao exeption BoundaryOutExeption", ^{
+            [[theBlock(^{
+                [sut2 insertAfterIndex:6 object:@12];
+            }) should] raiseWithName:@"BoundaryOutExeption"];
+        });
+        
+        it(@"Them mot phan tu nil vao cuoi danh sach se nem vao exeption InsertObjectNil", ^{
+            [[theBlock(^{
+                [sut2 insertAfterIndex:5 object:nil];
+            }) should] raiseWithName:@"InsertObjectNil"];
+        });
+    });
+    
+    context(@"Xoa node n khoi danh sach", ^{
+        it(@"Xoa node n khoi danh sach, so phan tu giam di 1", ^{
+            NSUInteger current = sut2.size;
+            [sut2 deleteIndex:4];
+            [[theValue(sut2.size) should] equal:theValue(current - 1)];
+        });
+        
+        it(@"Node bi xoa la node n trong danh sach", ^{
+            
+        });
+    });
         
 });
 SPEC_END
