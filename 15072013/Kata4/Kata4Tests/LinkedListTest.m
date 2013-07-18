@@ -165,7 +165,15 @@ describe(@"LinkedList test", ^{
         });
         
         it(@"Node bi xoa la node n trong danh sach", ^{
-            
+            id objectbeforedelte = [sut2 first];
+            id objectdeleted = [sut2 deleteIndex:0];
+            [[objectbeforedelte should] equal:objectdeleted];
+        });
+        
+        it(@"Node bi xoa n >= so luong phan tu trong danh sach, se thong bao exeption BoundaryOutExeption ", ^{
+            [[theBlock(^{
+                [sut2 deleteIndex:6];
+            }) should] raiseWithName:@"BoundaryOutExeption"];
         });
     });
         

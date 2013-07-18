@@ -100,8 +100,13 @@
 }
 
 -(id)deleteIndex:(NSUInteger)index {
-    [items removeObjectAtIndex:index];
-    return nil;
+    if (index >= items.count) {
+        @throw [NSException exceptionWithName:@"BoundaryOutExeption" reason:nil userInfo:nil];
+    } else {
+        id objectWillDelete = [items objectAtIndex:index];
+        [items removeObjectAtIndex:index];
+        return objectWillDelete;
+    }
 }
 
 @end
