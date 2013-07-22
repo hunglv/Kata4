@@ -85,6 +85,56 @@ describe(@"LinkedList test", ^{
             [[object should] equal:@4];
         });
     });
+    
+    context(@"insert at first", ^{
+        it(@"size of list should be increase by 1", ^{
+            NSInteger sizeBefore = sut.size;
+            [sut insertFirst:@0];
+            [[theValue(sut.size) should] equal:theValue(sizeBefore + 1)];
+        });
         
+        it(@"first object should equal object've just inserted", ^{
+            [sut insertFirst:@100];
+            id first = [sut first];
+            [first shouldNotBeNil];
+            [[first should] equal:@100];
+        });
+    });
+    
+    context(@"insert at end", ^{
+        it(@"size of list should be increase by 1", ^{
+            NSInteger sizeBefore = sut.size;
+            [sut append:@0];
+            [[theValue(sut.size) should] equal:theValue(sizeBefore + 1)];
+        });
+        
+        it(@"first object should equal object've just inserted", ^{
+            [sut append:@100];
+            id last = [sut last];
+            [last shouldNotBeNil];
+            [[last should] equal:@100];
+        });
+    });
+    
+    context(@"insert after index n", ^{
+        it(@"n > size - 1 should raise exeption BoundaryOut", ^{
+            [[theBlock(^{
+                [sut2 insertAfter:5 object:@100];
+            }) should] raiseWithName:@"BoundaryOut"];
+        });
+        
+        it(@"size of list should be increase by 1", ^{
+            NSInteger sizeBefore = sut2.size;
+            [sut2 insertAfter:3 object:@100];
+            [[theValue(sut2.size) should] equal:theValue(sizeBefore + 1)];
+        });
+        
+        it(@"object after index n should be object've just inserted", ^{
+            [sut2 insertAfter:3 object:@100];
+            id object = [sut2 after:3];
+            [object shouldNotBeNil];
+            [[object should] equal:@100];
+        });
+    });
 });
 SPEC_END

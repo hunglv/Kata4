@@ -8,14 +8,14 @@
 
 #import "LinkedList.h"
 
-@interface Note : NSObject
+@interface Node : NSObject
 
-@property (nonatomic, strong) Note *next;
+@property (nonatomic, strong) Node *next;
 @property (nonatomic, strong) id data;
 
 @end
 
-@implementation Note
+@implementation Node
 
 @synthesize next;
 @synthesize data;
@@ -33,8 +33,8 @@
 
 @interface LinkedList()
 
-@property (nonatomic, strong) Note *head;
-@property (nonatomic, strong) Note *tail;
+@property (nonatomic, strong) Node *head;
+@property (nonatomic, strong) Node *tail;
 
 @end
 
@@ -48,10 +48,10 @@
     if (self = [super init]) {
         if (array) {
             size = array.count;
-            Note *current;
+            Node *current;
             for (int i = 0; i < size; i ++) {
                 id object = [array objectAtIndex:i];
-                Note *note = [[Note alloc] init];
+                Node *note = [[Node alloc] init];
                 note.data = object;
                 if (!head) {
                     head = note;
@@ -59,6 +59,9 @@
                 } else {
                     current.next = note;
                     current = note;
+                }
+                if (!note.next) {
+                    tail = note;
                 }
             }
         }
@@ -80,9 +83,9 @@
         @throw [NSException exceptionWithName:@"BoundaryOut" reason:nil userInfo:nil];
     } else {
         int i = 0;
-        Note *current = head;
+        Node *current = head;
         while (i < index - 1) {
-            Note *next = current.next;
+            Node *next = current.next;
             current = next;
             i ++;
         }
@@ -97,15 +100,62 @@
         @throw [NSException exceptionWithName:@"BoundaryOut" reason:nil userInfo:nil];
     } else {
         int i = 0;
-        Note *current = head;
+        Node *current = head;
         while (i < index) {
-            Note *next = current.next;
+            Node *next = current.next;
             current = next;
             i ++;
         }
         object = current.next.data;
     }
     return object;
+}
+
+-(void)insertFirst:(id)object {
+    size ++;
+    Node *node = [[Node alloc] init];
+    node.data = object;
+    if (head) {
+        node.next = head;
+    }
+    head = node;
+}
+
+-(void)append:(id)object {
+    size ++;
+    Node *node = [[Node alloc] init];
+    node.data = object;
+    if (!head) {
+        head = node;
+        tail =node;
+    } else {
+        tail.next = node;
+        tail = node;
+    }
+}
+
+-(void)insertAfter:(NSUInteger)index object:(id)data {
+    if (index > size - 1) {
+         @throw [NSException exceptionWithName:@"BoundaryOut" reason:nil userInfo:nil];
+    } else {
+        size ++;
+        NSUInteger i = 0;
+        Node *current = head;
+        while (i < index) {
+            Node *next = current.next;
+            current = next;
+            i ++;
+        }
+        Node *currentNext = current.next;
+        
+        Node *newNode = [[Node alloc] init];
+        newNode.data = data;
+        
+        current.next = newNode;
+        if (currentNext) {
+            newNode.next = currentNext;
+        }
+    }
 }
 
 @end

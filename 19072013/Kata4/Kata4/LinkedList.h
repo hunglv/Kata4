@@ -21,4 +21,10 @@
 - (id)before:(NSUInteger)index;
 
 - (id)after:(NSUInteger)index;
+
+- (void)insertFirst:(id)object;
+
+- (void)append:(id)object;
+
+- (void)insertAfter:(NSUInteger)index object:(id)data;
 @end
