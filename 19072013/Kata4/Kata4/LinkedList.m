@@ -158,4 +158,55 @@
     }
 }
 
+-(id)search:(id)object {
+    id returnObject = nil;
+    Node *current = head;
+    if ([current.data isEqual:object]) {
+        returnObject = current.data;
+    } else {
+        while (current != tail) {
+            Node *next = current.next;
+            current = next;
+            if ([current.data isEqual:object]) {
+                returnObject = current.data;
+                break;
+            }           
+        }
+    }
+    
+    return returnObject;
+}
+
+-(void)deleteIndex:(NSUInteger)index {
+    if (index >= size) {
+        @throw [NSException exceptionWithName:@"BoundaryOut" reason:nil userInfo:nil];
+    } else {
+        size --;
+        int i = 0;
+        Node *current = head;
+        Node *beforeCurrent = current;
+        if (index == 0) {
+            head = head.next;
+        } else {
+            while (i < index) {
+                if (i == index - 1) {
+                    beforeCurrent = current;
+                }
+                Node *next = current.next;
+                current = next;
+                i ++;
+                
+            }
+            Node *nexe = current.next;
+            if (!nexe) {
+                tail = beforeCurrent;
+            } else {
+                beforeCurrent.next = nexe;
+            }
+            
+        }
+        
+    }
+}
+
 @end

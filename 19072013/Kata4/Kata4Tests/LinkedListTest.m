@@ -14,7 +14,7 @@ describe(@"LinkedList test", ^{
     
     beforeEach(^{
         sut = [[LinkedList alloc] init];
-        NSArray *array = @[@0, @1, @2, @3, @4];
+        NSArray *array = @[@0, @1, @2, @3, @100];
         sut2 = [[LinkedList alloc] initWithArray:array];
         
     });
@@ -54,7 +54,7 @@ describe(@"LinkedList test", ^{
         
         it(@"last object in list is not empty", ^{
             id object = [sut2 last];
-            [[object should] equal:@4];
+            [[object should] equal:@100];
         });
     });
     
@@ -82,7 +82,7 @@ describe(@"LinkedList test", ^{
         it(@"other case, should return object after index n", ^{
             id object = [sut2 after:3];
             [object shouldNotBeNil];
-            [[object should] equal:@4];
+            [[object should] equal:@100];
         });
     });
     
@@ -134,6 +134,53 @@ describe(@"LinkedList test", ^{
             id object = [sut2 after:3];
             [object shouldNotBeNil];
             [[object should] equal:@100];
+        });
+    });
+    
+    context(@"search object", ^{
+        it(@"in list, there're no object like given object, return object should be nil", ^{
+            id object = [sut2 search:@1001];
+            [object shouldBeNil];
+        });
+        
+        it(@"there's given object in list", ^{
+            id object = [sut2 search:@100];
+            [object shouldNotBeNil];
+            [[object should] equal:@100];
+        });
+    });
+    
+    context(@"delete node n", ^{
+        it(@"n > size - 1 should raise exeption BoundaryOut", ^{
+            [[theBlock(^{
+                [sut2 deleteIndex:5];
+            }) should] raiseWithName:@"BoundaryOut"];
+        });
+        it(@"size should be decrease by 1", ^{
+            NSUInteger sizebefore = sut2.size;
+            [sut2 deleteIndex:1];
+            [[theValue(sut2.size ) should] equal:theValue(sizebefore - 1)];
+        });
+        
+        it(@"after delete index n, object at index n should be next object", ^{
+            id objectNext = [sut2 after:3];
+            [sut2 deleteIndex:3];
+            id objectAtIndex3 = [sut2 after:2];
+            [[objectAtIndex3 should] equal:objectNext];
+        });
+        
+        it(@"delete node 0", ^{
+            id objectNext = [sut2 after:0];
+            [sut2 deleteIndex:0];
+            id objectAtIndex3 = [sut2 first];
+            [[objectAtIndex3 should] equal:objectNext];
+        });
+        
+        it(@"delete node last", ^{
+            id objectNext = [sut2 before:4];
+            [sut2 deleteIndex:4];
+            id objectAtIndex3 = [sut2 last];
+            [[objectAtIndex3 should] equal:objectNext];
         });
     });
 });

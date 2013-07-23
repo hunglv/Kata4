@@ -27,4 +27,8 @@
 - (void)append:(id)object;
 
 - (void)insertAfter:(NSUInteger)index object:(id)data;
+
+- (id)search:(id)object;
+
+- (void)deleteIndex:(NSUInteger)index;
 @end
